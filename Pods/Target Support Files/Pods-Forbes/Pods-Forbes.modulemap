@@ -1,0 +1,6 @@
+framework module Pods_Forbes {
+  umbrella header "Pods-Forbes-umbrella.h"
+
+  export *
+  module * { export * }
+}
