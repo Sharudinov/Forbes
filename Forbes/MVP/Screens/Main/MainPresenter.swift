@@ -8,25 +8,25 @@
 import Foundation
 
 protocol MainPresenterInput {
-    func viewDidLoad ()
+    func viewDidLoad()
 }
 
 class MainPresenter: MainPresenterInput {
     
-    let networkService = NetworkService()
-    weak var view: MainViewInput?
+    private let networkService = NetworkService()
+    private weak var view: MainViewInput?
     
     init(view: MainViewInput) {
         self.view = view
     }
     
     func viewDidLoad() {
-        
         loadData()
-}
+    }
+
     private func loadData() {
-        networkService.loadData { [weak self] (personArray) in
+        networkService.loadData { [weak self] personArray in
             self?.view?.displayData(personArray)
         }
-}
+    }
 }

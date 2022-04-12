@@ -5,58 +5,32 @@
 //  Created by Мурад on 06.03.2022.
 //
 
-import UIKit
 import SnapKit
 import SDWebImage
 
 class DetaleViewController: UIViewController {
-    
-    var avatarImageView = UIImageView()
-    var fullName = UILabel()
-    var company = UILabel()
-    var profession = UILabel()
-    var topView = UIView()
-    var inst = UIImageView()
-    var vk = UIImageView()
-    var whatsUp = UIImageView()
-    
-    
-    func configure(person: Person) {
-        fullName.text = "Fio: " + person.fio
-        if person.company.isEmpty {
-            company.isHidden = true
-        } else {
-            company.isHidden = false
-            company.text = "Company: " + person.company
-        }
-        
-        profession.text = "Profession: " + person.post
 
-        
-        avatarImageView.sd_setImage(with: URL(string: person.photo),placeholderImage: UIImage(named: "placeholder"))
-        
-    }
+    private let avatarImageView = UIImageView()
+    private let fullName = UILabel()
+    private let company = UILabel()
+    private let profession = UILabel()
+    private let topView = UIView()
+    private let inst = UIImageView()
+    private let vk = UIImageView()
+    private let whatsUp = UIImageView()
     
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
+
         navigationController?.navigationBar.barTintColor = (UIColor .systemIndigo)
-        
-        
+
         navigationItem.title = "Info"
         view.backgroundColor = .lightGray
-        
-        
-        super.viewDidLoad()
+
         setupUI()
-        
-}
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
     }
-    func setupUI() {
-        
-        
+
+    private func setupUI() {
         view.addSubview(topView)
         topView.backgroundColor = .systemIndigo
         topView.snp.makeConstraints { make  in
@@ -114,10 +88,7 @@ class DetaleViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.bottom.equalToSuperview().inset(20)
         }
-       
-       
-            
-        
+
         let labelStackView = UIStackView(arrangedSubviews: [fullName,company,profession])
         labelStackView.axis = .vertical
         labelStackView.alignment = .center
@@ -150,5 +121,16 @@ class DetaleViewController: UIViewController {
         profession.textColor = .white
         profession.numberOfLines = 0
     }
-}
 
+    // Лучше метод конфигурации не в самом начале, так как это вспомогательный метод. В начале только методы жизненного цикла
+    func configure(person: Person) {
+        fullName.text = "Fio: " + person.fio
+
+        company.isHidden = person.company.isEmpty
+        company.text = "Company: " + person.company
+
+        profession.text = "Profession: " + person.post
+
+        avatarImageView.sd_setImage(with: URL(string: person.photo),placeholderImage: UIImage(named: "placeholder"))
+    }
+}

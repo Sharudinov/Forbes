@@ -13,8 +13,8 @@ struct Response: Decodable {
 }
 
 // MARK: - Datum
+
 struct Person: Decodable {
     let fio, sex, post, company: String
     let photo: String
 }
-
