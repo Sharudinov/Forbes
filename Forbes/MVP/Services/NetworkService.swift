@@ -5,7 +5,6 @@
 //  Created by Мурад on 14.03.2022.
 //
 
-import Foundation
 import Alamofire
 
 class NetworkService {
@@ -21,8 +20,6 @@ class NetworkService {
                 case let .success(response):
                     completion(response.data)
                 }
-        }
-        
+            }
     }
-    
 }
